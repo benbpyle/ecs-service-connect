@@ -1,4 +1,5 @@
 import { IVpc, SubnetType, Vpc } from "aws-cdk-lib/aws-ec2";
+import { StringParameter } from "aws-cdk-lib/aws-ssm";
 import { Construct } from "constructs";
 
 export class VpcConstruct extends Construct {
@@ -35,5 +36,9 @@ export class VpcConstruct extends Construct {
       vpcName: "CustomVpc",
     });
 
+    new StringParameter(scope, `SsmParamVpcName`, {
+      parameterName: `/core-infra/vpc-name`,
+      stringValue: 'CustomVpc',
+    });
   }
 }
