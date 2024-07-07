@@ -1,13 +1,13 @@
-import { Peer, Port, SecurityGroup } from 'aws-cdk-lib/aws-ec2';
 import {
   FargateService,
   LogDrivers,
   TaskDefinition,
 } from 'aws-cdk-lib/aws-ecs';
 import { Construct } from 'constructs';
-import { SharedResources } from '../types/shared-resources';
-import { EcsService } from '../types/service';
+import { Peer, Port, SecurityGroup } from 'aws-cdk-lib/aws-ec2';
 import { Duration } from 'aws-cdk-lib';
+import { EcsService } from '../types/service';
+import { SharedResources } from '../types/shared-resources';
 
 export interface EcsServiceConstructProps {
   service: EcsService;
@@ -55,14 +55,14 @@ export class EcsServiceConstruct extends Construct {
             {
               portMappingName: 'web',
               dnsName: props.service.apiShortName,
-              port: 8080,
+              port: 8081,
               discoveryName: props.service.apiShortName,
-              // timeout requests at 10 seconds
-              perRequestTimeout: Duration.seconds(10)
+              //perRequestTimeout: Duration.seconds(10)
             },
           ],
         },
       }
     );
+
   }
 }

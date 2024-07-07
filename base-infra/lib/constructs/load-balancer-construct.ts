@@ -57,8 +57,8 @@ export class LoadBalancerConstruct extends Construct {
       scope,
       `SsmParam-ALB-Name`,
       {
-        parameterName: `/core-infra/alb-name`,
-        stringValue: 'sample-cluster-alb',
+        parameterName: `/core-infra/alb-arn`,
+        stringValue: this._loadBalancer.loadBalancerArn,
       }
     );
 
