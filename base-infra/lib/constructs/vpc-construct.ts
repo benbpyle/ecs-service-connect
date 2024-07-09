@@ -18,17 +18,17 @@ export class VpcConstruct extends Construct {
         {
           name: "custom-vpc-public-subnet",
           subnetType: SubnetType.PUBLIC,
-          cidrMask: 24,
+          cidrMask: 28,
         },
         {
           name: "custom-vpc-private-subnet",
           subnetType: SubnetType.PRIVATE_WITH_EGRESS,
-          cidrMask: 24,
+          cidrMask: 28,
         },
         {
           name: "custom-vpc-isolated-subnet",
           subnetType: SubnetType.PRIVATE_ISOLATED,
-          cidrMask: 24,
+          cidrMask: 28,
         },
       ],
       maxAzs: 2,
