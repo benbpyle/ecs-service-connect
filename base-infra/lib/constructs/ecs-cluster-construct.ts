@@ -2,6 +2,7 @@ import { Cluster } from 'aws-cdk-lib/aws-ecs';
 import { Construct } from 'constructs';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { IVpc, SecurityGroup } from 'aws-cdk-lib/aws-ec2';
+import { NamespaceType } from 'aws-cdk-lib/aws-servicediscovery';
 
 export interface EcsClusterConstructProps {
   vpc: IVpc;
@@ -25,7 +26,13 @@ export class EcsClusterConstruct extends Construct {
       `EcsCluster`,
       {
         clusterName: `DemoCluster`,
-        vpc: props.vpc
+        vpc: props.vpc,
+        defaultCloudMapNamespace: {
+          name: "highlands.local",
+          useForServiceConnect: true,
+          type: NamespaceType.HTTP,
+          vpc: props.vpc
+        }
       }
     );
 

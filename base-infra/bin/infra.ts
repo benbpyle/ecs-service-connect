@@ -5,4 +5,4 @@ import { InfraStack } from '../lib/infra-stack';
 
 const app = new App();
 
-new InfraStack(app, 'AppGenInfraStack', {});
+new InfraStack(app, 'BaseInfraStack', {});
