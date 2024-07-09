@@ -48,7 +48,7 @@ export class LoadBalancerConstruct extends Construct {
       {
         vpc: props.vpc,
         internetFacing: true,
-        loadBalancerName: `sample-cluster-alb`,
+        loadBalancerName: `sample-cluster-latency-alb`,
         securityGroup: securityGroup,
       }
     );
@@ -57,7 +57,7 @@ export class LoadBalancerConstruct extends Construct {
       scope,
       `SsmParam-ALB-Name`,
       {
-        parameterName: `/core-infra/alb-arn`,
+        parameterName: `/core-infra/alb-latency-arn`,
         stringValue: this._loadBalancer.loadBalancerArn,
       }
     );
@@ -67,7 +67,7 @@ export class LoadBalancerConstruct extends Construct {
       scope,
       `SsmParam-SecurityGroup-ID`,
       {
-        parameterName: `/core-infra/alb-security-group-id`,
+        parameterName: `/core-infra/alb-latency-security-group-id`,
         stringValue: securityGroup.securityGroupId,
       }
     );

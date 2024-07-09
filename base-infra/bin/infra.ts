@@ -5,4 +5,4 @@ import { InfraStack } from '../lib/infra-stack';
 
 const app = new App();
 
-new InfraStack(app, 'BaseInfraStack', {});
+new InfraStack(app, 'BaseInfraStack-Latency', {});

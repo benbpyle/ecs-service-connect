@@ -25,10 +25,10 @@ export class EcsClusterConstruct extends Construct {
       scope,
       `EcsCluster`,
       {
-        clusterName: `DemoCluster`,
+        clusterName: `DemoCluster-Latency`,
         vpc: props.vpc,
         defaultCloudMapNamespace: {
-          name: "highlands.local",
+          name: `highlands-latency.local`,
           useForServiceConnect: true,
           type: NamespaceType.HTTP,
           vpc: props.vpc
@@ -37,12 +37,12 @@ export class EcsClusterConstruct extends Construct {
     );
 
     new StringParameter(scope, `SsmParamClusterName`, {
-      parameterName: `/core-infra/demo-cluster-name`,
-      stringValue: 'DemoCluster',
+      parameterName: `/core-infra/demo-cluster-latency-name`,
+      stringValue: cluster.clusterName,
     });
 
     new StringParameter(scope, `SsmParamClusterArn`, {
-      parameterName: `/core-infra/demo-cluster-arn`,
+      parameterName: `/core-infra/demo-cluster-latency-arn`,
       stringValue: cluster.clusterArn,
     });
   }

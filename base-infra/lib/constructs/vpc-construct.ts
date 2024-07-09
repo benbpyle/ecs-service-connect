@@ -18,27 +18,27 @@ export class VpcConstruct extends Construct {
         {
           name: "custom-vpc-public-subnet",
           subnetType: SubnetType.PUBLIC,
-          cidrMask: 24,
+          cidrMask: 28,
         },
         {
           name: "custom-vpc-private-subnet",
           subnetType: SubnetType.PRIVATE_WITH_EGRESS,
-          cidrMask: 24,
+          cidrMask: 28,
         },
         {
           name: "custom-vpc-isolated-subnet",
           subnetType: SubnetType.PRIVATE_ISOLATED,
-          cidrMask: 24,
+          cidrMask: 28,
         },
       ],
       maxAzs: 2,
       natGateways: 2,
-      vpcName: "CustomVpc",
+      vpcName: "CustomVpc-Latency",
     });
 
     new StringParameter(scope, `SsmParamVpcName`, {
-      parameterName: `/core-infra/vpc-name`,
-      stringValue: 'CustomVpc',
+      parameterName: `/core-infra/vpc-latency-name`,
+      stringValue: 'CustomVpc-Latency',
     });
   }
 }
