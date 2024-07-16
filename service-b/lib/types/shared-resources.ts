@@ -6,5 +6,6 @@ export interface SharedResources {
   vpc: IVpc;
   cluster: ICluster;
   loadBalancer: IApplicationLoadBalancer,
-  securityGroup: ISecurityGroup
+  securityGroup: ISecurityGroup,
+  namespace: string;
 }

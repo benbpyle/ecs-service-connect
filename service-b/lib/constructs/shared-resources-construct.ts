@@ -17,11 +17,14 @@ export class SharedResourcesConstruct extends Construct {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const clusterName = StringParameter.fromStringParameterName(scope, "ClusterName", "/core-infra/demo-cluster-name");
-    const clusterArn = StringParameter.fromStringParameterName(scope, "ClusterArn", "/core-infra/demo-cluster-arn");
-    const vpcName = StringParameter.valueFromLookup(scope, "/core-infra/vpc-name");
-    const securityGroupId = StringParameter.valueFromLookup(scope, "/core-infra/alb-security-group-id");
-    const albArn = StringParameter.valueFromLookup(scope, "/core-infra/alb-arn");
+
+    const clusterName = StringParameter.fromStringParameterName(scope, "ClusterName", "/core-infra/demo-cluster-latency-name");
+    const clusterArn = StringParameter.fromStringParameterName(scope, "ClusterArn", "/core-infra/demo-cluster-latency-arn");
+    const vpcName = StringParameter.valueFromLookup(scope, "/core-infra/vpc-latency-name");
+    const namespace = StringParameter.fromStringParameterName(scope, "Namespace", "/core-infra/demo-cluster-latency-namespace");
+
+    const securityGroupId = StringParameter.valueFromLookup(scope, "/core-infra/alb-latency-security-group-id");
+    const albArn = StringParameter.valueFromLookup(scope, "/core-infra/alb-latency-arn");
 
     let vpc = Vpc.fromLookup(scope, `CustomVpc`, {
       tags: {
@@ -45,6 +48,7 @@ export class SharedResourcesConstruct extends Construct {
       loadBalancer: loadBalancer,
       securityGroup: securityGroup,
       cluster: ecsCluster,
+      namespace: namespace.stringValue
     }
 
   }

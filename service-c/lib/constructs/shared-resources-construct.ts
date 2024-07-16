@@ -15,9 +15,10 @@ export class SharedResourcesConstruct extends Construct {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
-    const clusterName = StringParameter.fromStringParameterName(scope, "ClusterName", "/core-infra/demo-cluster-name");
-    const clusterArn = StringParameter.fromStringParameterName(scope, "ClusterArn", "/core-infra/demo-cluster-arn");
-    const vpcName = StringParameter.valueFromLookup(scope, "/core-infra/vpc-name");
+    const clusterName = StringParameter.fromStringParameterName(scope, "ClusterName", "/core-infra/demo-cluster-latency-name");
+    const clusterArn = StringParameter.fromStringParameterName(scope, "ClusterArn", "/core-infra/demo-cluster-latency-arn");
+    const vpcName = StringParameter.valueFromLookup(scope, "/core-infra/vpc-latency-name");
+    const namespace = StringParameter.fromStringParameterName(scope, "Namespace", "/core-infra/demo-cluster-latency-namespace");
 
     let vpc = Vpc.fromLookup(scope, `CustomVpc`, {
       tags: {
@@ -35,7 +36,9 @@ export class SharedResourcesConstruct extends Construct {
     this._sr = {
       vpc: vpc,
       cluster: ecsCluster,
+      namespace: namespace.stringValue
     }
+
 
   }
 }

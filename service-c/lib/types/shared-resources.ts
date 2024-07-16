@@ -4,4 +4,5 @@ import { ICluster } from "aws-cdk-lib/aws-ecs";
 export interface SharedResources {
   vpc: IVpc;
   cluster: ICluster;
+  namespace: string;
 }

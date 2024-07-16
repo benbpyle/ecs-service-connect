@@ -27,6 +27,12 @@ export class EcsServiceConstruct extends Construct {
       true
     )
 
+    lbSecurityGroup.addIngressRule(
+      securityGroup,
+      Port.tcp(3001),
+      "Traffic Override for Service Connect Inbound",
+      true
+    )
     const healthCheck = {
       path: '/health',
       timeout: Duration.seconds(30),
@@ -58,9 +64,9 @@ export class EcsServiceConstruct extends Construct {
       `BTG-${service.serviceName}`,
       {
         vpc: vpc,
-        port: 3000,
+        port: 3001,
         protocol: ApplicationProtocol.HTTP,
-        targetGroupName: `${service.serviceName}-blue-tg`,
+        targetGroupName: `${service.serviceName}-blue-latency-tg`,
         targetType: TargetType.IP,
         healthCheck: healthCheck
       }
@@ -107,14 +113,15 @@ export class EcsServiceConstruct extends Construct {
           logDriver: LogDrivers.awsLogs({
             streamPrefix: props.service.serviceName
           }),
-          namespace: 'highlands.local',
+          namespace: props.sharedResources.namespace,
           services: [
             {
               portMappingName: 'web',
               dnsName: props.service.apiShortName,
               port: 8082,
               discoveryName: props.service.apiShortName,
-              // perRequestTimeout: Duration.seconds(10)
+              perRequestTimeout: Duration.seconds(5),
+              ingressPortOverride: 3001
             },
           ],
         },

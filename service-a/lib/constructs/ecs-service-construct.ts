@@ -50,7 +50,7 @@ export class EcsServiceConstruct extends Construct {
           logDriver: LogDrivers.awsLogs({
             streamPrefix: props.service.serviceName
           }),
-          namespace: 'highlands.local',
+          namespace: props.sharedResources.namespace,
           services: [
             {
               portMappingName: 'web',

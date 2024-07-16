@@ -45,5 +45,10 @@ export class EcsClusterConstruct extends Construct {
       parameterName: `/core-infra/demo-cluster-latency-arn`,
       stringValue: cluster.clusterArn,
     });
+
+    new StringParameter(scope, 'SsmClusterNamespace', {
+      parameterName: '/core-infra/demo-cluster-latency-namespace',
+      stringValue: 'highlands-latency.local'
+    })
   }
 }

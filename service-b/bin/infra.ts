@@ -4,7 +4,7 @@ import * as cdk from 'aws-cdk-lib';
 import { ServiceBApiStack } from '../lib/service-b-api-stack';
 
 const app = new cdk.App();
-new ServiceBApiStack(app, 'ServiceBApiStack', {
+new ServiceBApiStack(app, 'ServiceBApiStack-Latency', {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
@@ -12,7 +12,7 @@ new ServiceBApiStack(app, 'ServiceBApiStack', {
   service: {
     serviceName: 'Service-B',
     ecrUri: 'public.ecr.aws/f8u4w2p3/rust-service-b',
-    imageTag: 'no-apm',
+    imageTag: 'latency-6',
     apiShortName: 'service-b'
   },
 });
